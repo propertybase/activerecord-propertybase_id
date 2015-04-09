@@ -25,8 +25,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "< 11.0"
   spec.add_development_dependency "rspec", "< 3.3"
   spec.add_development_dependency "factory_girl", "< 4.6"
-  spec.add_development_dependency "sqlite3", "< 1.4.0"
-  spec.add_development_dependency "pg", "< 0.19"
+  if defined?(JRUBY_VERSION)
+    spec.add_development_dependency "activerecord-jdbc-adapter", "< 1.4"
+    spec.add_development_dependency "jdbc-postgres", "< 9.5"
+    spec.add_development_dependency "jdbc-sqlite3", "< 3.9"
+  else
+    spec.add_development_dependency "pg", "< 0.19"
+    spec.add_development_dependency "sqlite3", "< 1.4.0"
+  end
   spec.add_development_dependency "database_cleaner", "< 1.5.0"
   spec.add_development_dependency "rspec-its", "< 1.3.0"
 end
