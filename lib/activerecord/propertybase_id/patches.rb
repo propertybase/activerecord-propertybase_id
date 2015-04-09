@@ -1,30 +1,4 @@
 module ActiveRecord
-  module Type
-    class PropertybaseId < String # :nodoc:
-      def type
-        :propertybase_id
-      end
-
-      def type_cast_from_database(value)
-        ::PropertybaseId.serialize(value)
-      end
-
-      def type_cast_for_database(value)
-        value.to_s
-      end
-
-      def type_cast_for_schema(value)
-        value.to_s.inspect
-      end
-
-      def type_cast_from_user(value)
-        ::PropertybaseId.serialize(value)
-      end
-    end
-  end
-end
-
-module ActiveRecord
   module PropertybaseId
     module Patches
       module Migrations

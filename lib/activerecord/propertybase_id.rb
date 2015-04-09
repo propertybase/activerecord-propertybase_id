@@ -1,10 +1,9 @@
 require "propertybase_id"
 require "active_record"
 require "active_support/concern"
-require "activerecord/propertybase_id/decorator"
 require "activerecord/propertybase_id/version"
 require "activerecord/propertybase_id/patches"
-require 'activerecord/propertybase_id/railtie' if defined?(Rails::Railtie)
+require "activerecord/propertybase_id/railtie" if defined?(Rails::Railtie)
 
 module Activerecord
   module PropertybaseId
@@ -39,5 +38,4 @@ module Activerecord
   end
 end
 
-::PropertybaseId.send(:include, ActiveRecord::PropertybaseId::Decorator)
 ActiveRecord::PropertybaseId::Patches.apply!
