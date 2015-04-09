@@ -1,3 +1,18 @@
 language: ruby
+cache: bundler
 rvm:
+  - 2.1.5
   - 2.2.1
+  - ruby-head
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+matrix:
+  fast_finish: true
+addons:
+  postgresql: "9.4"
+env:
+  - DB=sqlite3
+  - DB=postgresql
+before_script:
+    - psql -c 'create database propertybase_id_test;' -U postgres

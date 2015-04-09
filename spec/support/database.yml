@@ -3,7 +3,5 @@ sqlite3:
   database: ":memory:"
 postgresql:
   adapter: postgresql
-  username: propertybase_id
-  passoword: propertybase_id
   host: localhost
   database: propertybase_id_test
