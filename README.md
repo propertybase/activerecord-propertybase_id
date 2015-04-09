@@ -30,16 +30,18 @@ The Propertybase ID is stored via the `char(8)` data type (currently only tested
 
 Note: As Rails doesn't really support changing the type of the primary key in the migration. You need to work around a little bit. You need to disable the ID for a sepcific table and then add it as
 
-    class CreateTeams < ActiveRecord::Migration
-      def change
-        create_table :teams, id: false do |t|
-          t.propertybase_id :id, primary_key: true
+```ruby
+class CreateTeams < ActiveRecord::Migration
+  def change
+    create_table :teams, id: false do |t|
+      t.propertybase_id :id, primary_key: true
 
-          t.string :name
-          t.timestamps null: false
-        end
-      end
+      t.string :name
+      t.timestamps null: false
     end
+  end
+end
+```
 
 You are now all set to use the Propertybase ID as the primary key of your table.
 
@@ -47,17 +49,21 @@ You are now all set to use the Propertybase ID as the primary key of your table.
 
 To make sure the ID is generated, you need to include the `ActiveRecord::PropertybaseId` module:
 
-    class Team < ActiveRecord::Base
-      include Activerecord::PropertybaseId
-    end
+```ruby
+class Team < ActiveRecord::Base
+  include Activerecord::PropertybaseId
+end
+```
 
 The PropertybaseId need the object type as input. By default the object type will be inferred by the model name (currently only Team and User working), but you override it by specifying `propertybase_object`
 
-    class CustomizedUser < ActiveRecord::Base
-      include Activerecord::PropertybaseId
+```ruby
+class CustomizedUser < ActiveRecord::Base
+  include Activerecord::PropertybaseId
 
-      propertybase_object :user
-    end
+  propertybase_object :user
+end
+```
 
 ## Caveats
 
