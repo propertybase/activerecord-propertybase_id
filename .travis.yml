@@ -14,5 +14,8 @@ addons:
 env:
   - DB=sqlite3
   - DB=postgresql
+script:
+    - bundle exec rspec
 before_script:
+    - gem update bundler
     - psql -c 'create database propertybase_id_test;' -U postgres
