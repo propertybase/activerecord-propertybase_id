@@ -9,7 +9,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'activerecord-propertybase_id'
+gem "activerecord-propertybase_id"
 ```
 
 And then execute:
@@ -22,7 +22,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This ActiveRecord extension lets you use the [Propertybase ID](https://github.com/propertybase/propertybase_id) as a primary key in Rails.
+
+### Migration
+
+The Propertybase ID is stored via the `char(8)` data type (currently only tested on SQLite and PostgreSQL). You can also use the cusom migration type `propertybase_id`.
+
+Note: As Rails doesn't really support changing the type of the primary key in the migration. You need to work around a little bit. You need to disable the ID for a sepcific table and then add it as
+
+    class CreateTeams < ActiveRecord::Migration
+      def change
+        create_table :teams, id: false do |t|
+          t.propertybase_id :id, primary_key: true
+
+          t.string :name
+          t.timestamps null: false
+        end
+      end
+    end
+
+You are now all set to use the Propertybase ID as the primary key of your table.
+
+### ActiveRecord Models
+
+To make sure the ID is generated, you need to include the `ActiveRecord::PropertybaseId` module:
+
+    class Team < ActiveRecord::Base
+      include Activerecord::PropertybaseId
+    end
+
+The PropertybaseId need the object type as input. By default the object type will be inferred by the model name (currently only Team and User working), but you override it by specifying `propertybase_object`
+
+    class CustomizedUser < ActiveRecord::Base
+      include Activerecord::PropertybaseId
+
+      propertybase_object :user
+    end
+
+## Caveats
+
+Currently this gem only has been tested on PostgreSQL and SQLite and Rails version 4.2
 
 ## Development
 
