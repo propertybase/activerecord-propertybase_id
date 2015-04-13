@@ -5,7 +5,7 @@ require "activerecord/propertybase_id/version"
 require "activerecord/propertybase_id/patches"
 require "activerecord/propertybase_id/railtie" if defined?(Rails::Railtie)
 
-module Activerecord
+module ActiveRecord
   module PropertybaseId
     extend ActiveSupport::Concern
 

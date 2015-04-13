@@ -5,7 +5,7 @@ require "activerecord/propertybase_id/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "activerecord-propertybase_id"
-  spec.version       = Activerecord::PropertybaseId::VERSION
+  spec.version       = ActiveRecord::PropertybaseId::VERSION
   spec.authors       = ["Leif Gensert"]
   spec.email         = ["leif@propertybase.com"]
 

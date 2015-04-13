@@ -1,3 +1,3 @@
 class Team < ActiveRecord::Base
-  include Activerecord::PropertybaseId
+  include ActiveRecord::PropertybaseId
 end

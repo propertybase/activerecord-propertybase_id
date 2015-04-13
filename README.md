@@ -1,4 +1,4 @@
-# Activerecord::PropertybaseId
+# ActiveRecord::PropertybaseId
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/activerecord/propertybase_id`. To experiment with that code, run `bin/console` for an interactive prompt.
 
@@ -51,7 +51,7 @@ To make sure the ID is generated, you need to include the `ActiveRecord::Propert
 
 ```ruby
 class Team < ActiveRecord::Base
-  include Activerecord::PropertybaseId
+  include ActiveRecord::PropertybaseId
 end
 ```
 
@@ -59,7 +59,7 @@ The PropertybaseId need the object type as input. By default the object type wil
 
 ```ruby
 class CustomizedUser < ActiveRecord::Base
-  include Activerecord::PropertybaseId
+  include ActiveRecord::PropertybaseId
 
   propertybase_object :user
 end
