@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "< 1.10"
   spec.add_development_dependency "rake", "< 11.0"
   spec.add_development_dependency "rspec", "< 3.3"
-  spec.add_development_dependency "factory_girl", "< 4.6"
   if defined?(JRUBY_VERSION)
     spec.add_development_dependency "activerecord-jdbc-adapter", "< 1.4"
     spec.add_development_dependency "jdbc-postgres", "< 9.5"

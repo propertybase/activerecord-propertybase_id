@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe RegularTeam do
-  let!(:compare_to) { FactoryGirl.create(:regular_team) }
+  let!(:compare_to) { RegularTeam.create(name: "a Regular Team") }
   let(:id) { compare_to.id }
   let(:model) { RegularTeam }
   let(:id_type) { Integer }
@@ -11,7 +11,7 @@ describe RegularTeam do
 end
 
 describe Team do
-  let!(:compare_to) { FactoryGirl.create(:team) }
+  let!(:compare_to) { Team.create(name: "a Propertybase Team") }
   let(:id) { compare_to.id }
   let(:model) { Team }
   let(:id_type) { String }
@@ -22,7 +22,7 @@ describe Team do
 end
 
 describe CustomizedUser do
-  let!(:compare_to) { FactoryGirl.create(:customized_user) }
+  let!(:compare_to) { CustomizedUser.create(email: "user@propertybase.com") }
   let(:id) { compare_to.id }
   let(:model) { CustomizedUser }
   let(:id_type) { String }

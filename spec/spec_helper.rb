@@ -16,7 +16,6 @@ ActiveRecord::Migrator.migrate(File.dirname(__FILE__) + "/support/migrate")
 ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, STDOUT)
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   config.mock_with :rspec
