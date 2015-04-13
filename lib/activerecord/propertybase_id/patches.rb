@@ -12,19 +12,6 @@ module ActiveRecord
         end
       end
 
-      module AbstractAdapter
-        extend ActiveSupport::Concern
-
-        included do
-          def initialize_type_map_with_propertybase_id(m)
-            initialize_type_map_without_propertybase_id(m)
-            register_class_with_limit m, /char\(#{::PropertybaseId.max_length}\)/i, ::ActiveRecord::Type::PropertybaseId
-          end
-
-          alias_method_chain :initialize_type_map, :propertybase_id
-        end
-      end
-
       def self.apply!
         ActiveRecord::ConnectionAdapters::Table.send :include, Migrations if defined? ActiveRecord::ConnectionAdapters::Table
         ActiveRecord::ConnectionAdapters::TableDefinition.send :include, Migrations if defined? ActiveRecord::ConnectionAdapters::TableDefinition
