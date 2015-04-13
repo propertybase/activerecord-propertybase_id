@@ -11,7 +11,8 @@ describe RegularTeam do
 end
 
 describe Team do
-  let!(:compare_to) { Team.create(name: "a Propertybase Team") }
+  let(:model) { described_class }
+  let!(:compare_to) { model.create(name: "a Propertybase Team") }
   let(:id) { compare_to.id }
   let(:model) { Team }
   let(:id_type) { String }
@@ -22,7 +23,8 @@ describe Team do
 end
 
 describe CustomizedUser do
-  let!(:compare_to) { CustomizedUser.create(email: "user@propertybase.com") }
+  let(:model) { described_class }
+  let!(:compare_to) { model.create(email: "user@propertybase.com") }
   let(:id) { compare_to.id }
   let(:model) { CustomizedUser }
   let(:id_type) { String }

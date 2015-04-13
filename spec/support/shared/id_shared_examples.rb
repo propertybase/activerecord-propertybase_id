@@ -31,16 +31,36 @@ shared_examples "a regular AR object" do
 end
 
 shared_examples "an AR object with Propertybase ID" do |object_type|
-  context "valid Propertybase ID" do
-    subject { compare_to.propertybase_id }
+  describe "#propertybase_id" do
+    context "valid Propertybase ID" do
+      subject { compare_to.propertybase_id }
 
-    it { is_expected.to be_a(::PropertybaseId) }
+      it { is_expected.to be_a(::PropertybaseId) }
+    end
+
+    context "Object Type" do
+      subject { compare_to.propertybase_id }
+      let(:expected_object) { object_type }
+
+      its(:object) { is_expected.to eq(expected_object) }
+    end
   end
 
-  context "Object Type" do
-    subject { compare_to.propertybase_id }
-    let(:expected_object) { object_type }
+  describe "#create" do
+    context "no ID provieded" do
+      it "generates an ID by default" do
+        expect(model.create.id).not_to be_empty
+      end
+    end
 
-    its(:object) { is_expected.to eq(expected_object) }
+    context "ID provided" do
+      let(:custom_id) { "zzzzzzzzzzzzzzzzzz" }
+
+      before { model.create(id: custom_id) }
+
+      it "overrides on providing an ID" do
+        expect(model.find(custom_id)).not_to be_nil
+      end
+    end
   end
 end
