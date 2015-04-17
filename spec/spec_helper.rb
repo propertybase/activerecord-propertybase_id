@@ -32,10 +32,4 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-
-  def spec_for_adapter(&block)
-    switcher = ActiveRecord::PropertybaseId::SpecSupport::SpecForAdapter.new
-    yield switcher
-    switcher.run(connection)
-  end
 end
