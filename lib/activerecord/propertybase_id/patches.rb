@@ -1,49 +1,35 @@
 module ActiveRecord
   module PropertybaseId
     module Patches
+      PB_ID_SQL_TYPE = "char(#{::PropertybaseId.max_length})"
+
       module Migrations
         def propertybase_id(*column_names)
           options = column_names.extract_options!
           column_names.each do |name|
-            type = "char(#{::PropertybaseId.max_length})"
             primary_key = options.delete(:primary_key) || name.to_s == "id"
-            column(name, "#{type}#{' PRIMARY KEY' if primary_key}", options)
+            column(name, "#{PB_ID_SQL_TYPE}#{' PRIMARY KEY' if primary_key}", options)
           end
         end
       end
 
-      module PostgreSQLType
+      module AddPropertybaseIdColumn
         extend ActiveSupport::Concern
 
         included do
-          def type_to_sql_with_propertybase_id(*args)
-            return "character(#{::PropertybaseId.max_length})" if args.first.to_s == "propertybase_id"
-
-            type_to_sql_without_propertybase_id(*args)
+          def add_column_with_propertybase_id(name, type, options)
+            type = PB_ID_SQL_TYPE if type.to_sym == :propertybase_id
+            add_column_without_propertybase_id(name, type, options)
           end
 
-          alias_method_chain :type_to_sql, :propertybase_id
-        end
-      end
-
-      module SqliteType
-        extend ActiveSupport::Concern
-
-        included do
-          def new_column_with_propertybase_id(name, default, cast_type, sql_type = nil, null = true)
-            sql_type = "char(#{::PropertybaseId.max_length})" if sql_type == "propertybase_id"
-            new_column_without_propertybase_id(name, default, cast_type, sql_type, null)
-          end
-
-          alias_method_chain :new_column, :propertybase_id
+          alias_method_chain :add_column, :propertybase_id
         end
       end
 
       def self.apply!
         ActiveRecord::ConnectionAdapters::Table.send :include, Migrations if defined? ActiveRecord::ConnectionAdapters::Table
         ActiveRecord::ConnectionAdapters::TableDefinition.send :include, Migrations if defined? ActiveRecord::ConnectionAdapters::TableDefinition
-        ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaStatements.send :include, PostgreSQLType if defined? ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaStatements
-        ActiveRecord::ConnectionAdapters::AbstractAdapter.send :include, SqliteType if defined? ActiveRecord::ConnectionAdapters::AbstractAdapter
+        ActiveRecord::ConnectionAdapters::AlterTable.send :include, AddPropertybaseIdColumn
       end
     end
   end
