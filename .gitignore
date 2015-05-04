@@ -8,3 +8,4 @@
 /spec/reports/
 /spec/debug.log
 /tmp/
+/vendor/bundle
