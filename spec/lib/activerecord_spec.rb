@@ -32,6 +32,24 @@ describe CustomizedUser do
   it_behaves_like "an AR object with Propertybase ID", "user"
 end
 
+describe User do
+  context "references" do
+    let(:team) { Team.create(name: "the testers") }
+    subject { User.create(email: "no1@thetesters.com", team: team) }
+
+    its(:team_id) { is_expected.to eq(team.id) }
+  end
+end
+
+describe Listing do
+  context "references" do
+    let(:user) { User.create(email: "no1@thetesters.com") }
+    subject { Listing.create(address: "1 Infinite Loop", user: user) }
+
+    its(:user_id) { is_expected.to eq(user.id) }
+  end
+end
+
 describe ActiveRecord::Base do
   context ".connection" do
     let!(:connection) { ActiveRecord::Base.connection }
