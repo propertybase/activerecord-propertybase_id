@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe RegularTeam do
+  let(:model) { described_class }
   let!(:compare_to) { RegularTeam.create(name: "a Regular Team") }
   let(:id) { compare_to.id }
-  let(:model) { RegularTeam }
   let(:id_type) { Integer }
   subject { model }
 
@@ -14,7 +14,6 @@ describe Team do
   let(:model) { described_class }
   let!(:compare_to) { model.create(name: "a Propertybase Team") }
   let(:id) { compare_to.id }
-  let(:model) { Team }
   let(:id_type) { String }
   subject { model }
 
@@ -26,7 +25,6 @@ describe CustomizedUser do
   let(:model) { described_class }
   let!(:compare_to) { model.create(email: "user@propertybase.com") }
   let(:id) { compare_to.id }
-  let(:model) { CustomizedUser }
   let(:id_type) { String }
   subject { model }
 
