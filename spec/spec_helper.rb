@@ -9,6 +9,9 @@ require "active_support/all"
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
 ActiveRecord::Base.configurations = YAML::load(File.read(File.dirname(__FILE__) + "/support/database.yml"))
 ActiveRecord::Base.establish_connection((ENV["DB"] || "sqlite3").to_sym)
+ActiveRecord::Base.connection.tables.each do |table|
+  ActiveRecord::Base.connection.drop_table(table)
+end
 
 require "activerecord/propertybase_id"
 
