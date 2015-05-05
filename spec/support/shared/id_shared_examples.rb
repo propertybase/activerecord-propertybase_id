@@ -64,3 +64,11 @@ shared_examples "an AR object with Propertybase ID" do |object_type|
     end
   end
 end
+
+shared_examples "references" do
+  context "references" do
+    it "child references parent correctly" do
+      expect(child_record.send(foreign_key)).to eq(parent_record.id)
+    end
+  end
+end

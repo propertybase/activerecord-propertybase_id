@@ -32,6 +32,42 @@ describe CustomizedUser do
   it_behaves_like "an AR object with Propertybase ID", "user"
 end
 
+describe "Created with #references in migration" do
+  context "Properybase ID" do
+    let(:foreign_key) { :team_id }
+    let(:parent_record) { Team.create(name: "the testers") }
+    let(:child_record) { User.create(email: "no1@thetesters.com", team: parent_record) }
+
+    include_examples "references"
+  end
+
+  describe "Regular ID" do
+    let(:foreign_key) { :regular_team_id }
+    let(:parent_record) { RegularTeam.create(name: "the testers") }
+    let(:child_record) { RegularUser.create(email: "no1@thetesters.com", regular_team: parent_record) }
+
+    include_examples "references"
+  end
+end
+
+describe "Created with #add_reference in migration" do
+  describe "Properybase ID" do
+    let(:foreign_key) { :user_id }
+    let(:parent_record) { User.create(email: "no1@thetesters.com") }
+    let(:child_record) { Listing.create(address: "1 Infinite Loop", user: parent_record) }
+
+    include_examples "references"
+  end
+
+  describe "Regular ID" do
+    let(:foreign_key) { :regular_user_id }
+    let(:parent_record) { RegularUser.create(email: "no1@thetesters.com") }
+    let(:child_record) { RegularListing.create(address: "1 Infinite Loop", regular_user: parent_record) }
+
+    include_examples "references"
+  end
+end
+
 describe ActiveRecord::Base do
   context ".connection" do
     let!(:connection) { ActiveRecord::Base.connection }
