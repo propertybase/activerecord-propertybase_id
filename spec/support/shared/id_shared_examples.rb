@@ -31,15 +31,15 @@ shared_examples "a regular AR object" do
 end
 
 shared_examples "an AR object with Propertybase ID" do |object_type|
-  describe "#propertybase_id" do
+  describe "#propertybase_id_wrapped" do
     context "valid Propertybase ID" do
-      subject { compare_to.propertybase_id }
+      subject { compare_to.propertybase_id_wrapped }
 
       it { is_expected.to be_a(::PropertybaseId) }
     end
 
     context "Object Type" do
-      subject { compare_to.propertybase_id }
+      subject { compare_to.propertybase_id_wrapped }
       let(:expected_object) { object_type }
 
       its(:object) { is_expected.to eq(expected_object) }

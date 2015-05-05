@@ -16,7 +16,7 @@ module ActiveRecord
       before_create :generate_propertybase_id_if_needed
     end
 
-    def propertybase_id
+    def propertybase_id_wrapped
       pb_id_string = send(self.class.primary_key)
       ::PropertybaseId.parse(pb_id_string)
     end
