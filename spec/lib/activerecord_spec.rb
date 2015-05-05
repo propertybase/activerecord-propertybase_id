@@ -32,21 +32,39 @@ describe CustomizedUser do
   it_behaves_like "an AR object with Propertybase ID", "user"
 end
 
-describe User do
-  context "references" do
-    let(:team) { Team.create(name: "the testers") }
-    subject { User.create(email: "no1@thetesters.com", team: team) }
+describe "Created with #references in migration" do
+  context "Properybase ID" do
+    let(:foreign_key) { :team_id }
+    let(:parent_record) { Team.create(name: "the testers") }
+    let(:child_record) { User.create(email: "no1@thetesters.com", team: parent_record) }
 
-    its(:team_id) { is_expected.to eq(team.id) }
+    include_examples "references"
+  end
+
+  describe "Regular ID" do
+    let(:foreign_key) { :regular_team_id }
+    let(:parent_record) { RegularTeam.create(name: "the testers") }
+    let(:child_record) { RegularUser.create(email: "no1@thetesters.com", regular_team: parent_record) }
+
+    include_examples "references"
   end
 end
 
-describe Listing do
-  context "references" do
-    let(:user) { User.create(email: "no1@thetesters.com") }
-    subject { Listing.create(address: "1 Infinite Loop", user: user) }
+describe "Created with #add_reference in migration" do
+  describe "Properybase ID" do
+    let(:foreign_key) { :user_id }
+    let(:parent_record) { User.create(email: "no1@thetesters.com") }
+    let(:child_record) { Listing.create(address: "1 Infinite Loop", user: parent_record) }
 
-    its(:user_id) { is_expected.to eq(user.id) }
+    include_examples "references"
+  end
+
+  describe "Regular ID" do
+    let(:foreign_key) { :regular_user_id }
+    let(:parent_record) { RegularUser.create(email: "no1@thetesters.com") }
+    let(:child_record) { RegularListing.create(address: "1 Infinite Loop", regular_user: parent_record) }
+
+    include_examples "references"
   end
 end
 

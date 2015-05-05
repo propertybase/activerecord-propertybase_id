@@ -18,7 +18,7 @@ module ActiveRecord
 
         included do
           def add_column_with_propertybase_id(name, type, options)
-            type = PB_ID_SQL_TYPE if type.to_sym == :propertybase_id
+            type = PB_ID_SQL_TYPE if type.to_s == "propertybase_id"
             add_column_without_propertybase_id(name, type, options)
           end
 
@@ -31,7 +31,7 @@ module ActiveRecord
 
         included do
           def add_reference_with_propertybase_id(table_name, ref_name, options = {})
-            options.merge!(type: PB_ID_SQL_TYPE) if options[:type].to_sym == :propertybase_id
+            options.merge!(type: PB_ID_SQL_TYPE) if options[:type].to_s == "propertybase_id"
             add_reference_without_propertybase_id(table_name, ref_name, options)
           end
 
@@ -45,7 +45,7 @@ module ActiveRecord
         included do
           def references_with_propertybase_id(*args)
             options = args.extract_options!
-            options.merge!(type: PB_ID_SQL_TYPE) if options[:type].to_sym == :propertybase_id
+            options.merge!(type: PB_ID_SQL_TYPE) if options[:type].to_s == "propertybase_id"
             args << options
             references_without_propertybase_id(*args)
           end
