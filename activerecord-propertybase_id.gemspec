@@ -18,12 +18,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "propertybase_id", ">= 0.4.0"
+  spec.add_dependency "propertybase_id", ">= 0.6.0"
   spec.add_dependency "activerecord", ">= 4.2", "< 4.3"
 
-  spec.add_development_dependency "bundler", "< 1.10"
+  spec.add_development_dependency "bundler", "< 1.12"
   spec.add_development_dependency "rake", "< 11.0"
-  spec.add_development_dependency "rspec", "< 3.3"
+  spec.add_development_dependency "rspec", "< 3.5"
   if defined?(JRUBY_VERSION)
     spec.add_development_dependency "activerecord-jdbc-adapter", "< 1.4"
     spec.add_development_dependency "jdbc-postgres", "< 9.5"
@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "pg", "< 0.19"
     spec.add_development_dependency "sqlite3", "< 1.4.0"
   end
-  spec.add_development_dependency "database_cleaner", "< 1.5.0"
+  spec.add_development_dependency "database_cleaner", "< 1.6.0"
   spec.add_development_dependency "rspec-its", "< 1.3.0"
 end
