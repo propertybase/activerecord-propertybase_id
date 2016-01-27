@@ -96,8 +96,8 @@ describe ActiveRecord::Base do
 
       it "has proper sql type" do
         spec_for_adapter do |adapters|
-          adapters.sqlite { expect(column.sql_type).to eq("char(18)") }
-          adapters.postgresql { expect(column.sql_type).to eq("character(18)") }
+          adapters.sqlite { expect(column.sql_type).to eq("char(15)") }
+          adapters.postgresql { expect(column.sql_type).to eq("character(15)") }
         end
       end
     end

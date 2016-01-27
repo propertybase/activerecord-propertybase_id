@@ -24,7 +24,7 @@ This ActiveRecord extension lets you use the [Propertybase ID](https://github.co
 
 ### Migration
 
-The Propertybase ID is stored via the `char(18)` data type (currently only tested on SQLite and PostgreSQL). You can also use the cusom migration type `propertybase_id`.
+The Propertybase ID is stored via the `char(15)` data type (currently only tested on SQLite and PostgreSQL). You can also use the cusom migration type `propertybase_id`.
 
 Note: As Rails doesn't really support changing the type of the primary key in the migration. You need to work around a little bit. You need to disable the ID for a sepcific table and then add it as
 

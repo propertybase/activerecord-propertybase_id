@@ -54,7 +54,7 @@ shared_examples "an AR object with Propertybase ID" do |object_type|
     end
 
     context "ID provided" do
-      let(:custom_id) { "zzzzzzzzzzzzzzzzzz" }
+      let(:custom_id) { "zzzzzzzzzzzzzzz" }
 
       before { model.create(id: custom_id) }
 
